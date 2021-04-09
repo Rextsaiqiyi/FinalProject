@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Map result</title>
+        <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" integrity="sha512-xodZBNTC5n17Xt2atTPuE1HxjVMSvLVW9ocqUKLsCC5CXdbqCmblAshOMAS6/keqq/sMZMZ19scR4PsZChSR7A==" crossorigin=""/>
+        <link rel="stylesheet" href="https://unpkg.com/leaflet.markercluster@1.4.1/dist/MarkerCluster.css" />
+        <link rel="stylesheet" href="https://unpkg.com/leaflet.markercluster@1.4.1/dist/MarkerCluster.Default.css" />
+        <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css" />
+        <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js" integrity="sha512-XQoYMqMTK8LvdxXYG3nZ448hOEQiglfqkJs1NOQV44cWnUrBc8PkAOcXy20w0vlaXaVUearIOBhiXZ5V3ynxwA==" crossorigin=""></script>
+        <style>
+            #map1 {height: 900px;}
+        </style>
+    </head>
+    <body>
+        <div id="map1"></div>
+        <script>
+            var mymap=L.map('map1').setView([51.0499,-114.0666], 11);
+
+            L.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token={accessToken}', {
+              attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors, Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
+              maxZoom: 18,
+              id: 'mapbox/streets-v11',
+              tileSize: 512,
+              zoomOffset: -1,
+              accessToken: 'pk.eyJ1IjoicmV4dHNhaXFpeWkiLCJhIjoiY2trbDI0dHcyMGNoazJvcHJ4NjRzbmQ1dSJ9.U9khOwx7gRDS8jClvmTDQQ'
+            }).addTo(mymap);
+
+            rentals = "https://data.calgary.ca/resource/gzkz-5k9a.geojson"
+            schools = "https://data.calgary.ca/resource/fd9t-tdn2.geojson"
+            var schoolicon=L.icon({
+              iconUrl: '/static/school.png',
+              iconSize: [15,15]
+            });
+            var schoollayer=fetch(schools)
+                              .then(function(response) {
+                                return response.json();
+                              })
+                              .then(function(data) {
+                                L.geoJSON(data, {onEachFeature: function (feature, layer){
+                                  L.marker(([feature.geometry.coordinates[1],feature.geometry.coordinates[0]]), {icon: schoolicon}).bindPopup('ID: '+feature.properties.structure_id+'<br>'+'name: '+feature.properties.name).addTo(mymap);
+                                }});
+                              });
+        </script>
+        <center>
+          <h2>Filter school</h2>
+          <form action="{{url_for('result')}}" method="post">
+            <tr>
+              <td>Select your School</td>
+              <td><input type="text" name="name" placeholder="Enter School name" /></td>
+              <td><input type="text" name="rad" placeholder="Enter Search radius (meters)" /></td>
+            </tr>
+            <input type="submit" value="submit">
+          </form>
+    </body>
+  </html>
