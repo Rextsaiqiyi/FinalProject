@@ -13,17 +13,29 @@
         <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css" />
         <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js" integrity="sha512-XQoYMqMTK8LvdxXYG3nZ448hOEQiglfqkJs1NOQV44cWnUrBc8PkAOcXy20w0vlaXaVUearIOBhiXZ5V3ynxwA==" crossorigin=""></script>
         <style>
-            #map1 {height:900px;
+            #map1 {height:750px;
             }
         </style>
     </head>
     <body>
-      <!--Bootstrap navbar component-->
+<!--Bootstrap navbar component-->
+
       <nav class="navbar navbar-expand-md navbar-dark bg-dark">
         <div class="container-fluid">
           <a class="navbar-brand" href="{{url_for('index')}}">Home</a>
+          <div class="d-flex justify-content-center" id="navbarSupportedContent">
+<!--Search function-->
+            <form class="d-flex" action="{{url_for('result')}}" method="post">
+              <span class="collapse navbar-collapse" style ="color:white">Filter Schools</span>
+              <input class="form-control me-2" type="text" name = "name" placeholder="Enter School Name">
+              <input class="form-control me-2" type="text" name = "rad" placeholder="Enter Search Radius (meters)">
+              <input type = "submit" value = "Search">
+            </form>
+          </div>
         </div>
       </nav>
+
+<!--Map Initialization -->
         <div id="map1"></div>
         <script>
             var mymap=L.map('map1').setView([51.0499,-114.0666], 11);
@@ -36,7 +48,7 @@
               zoomOffset: -1,
               accessToken: 'pk.eyJ1IjoicmV4dHNhaXFpeWkiLCJhIjoiY2trbDI0dHcyMGNoazJvcHJ4NjRzbmQ1dSJ9.U9khOwx7gRDS8jClvmTDQQ'
             }).addTo(mymap);
-
+// fetch API of schools and rentals
             rentals = "https://data.calgary.ca/resource/gzkz-5k9a.geojson"
             schools = "https://data.calgary.ca/resource/fd9t-tdn2.geojson"
             var schoolicon=L.icon({
@@ -53,16 +65,7 @@
                                 }});
                               });
         </script>
-        <center>
-          <h2>Filter school</h2>
-          <form action="{{url_for('result')}}" method="post">
-            <tr>
-              <td>Select your School</td>
-              <td><input type="text" name="name" placeholder="Enter School name" /></td>
-              <td><input type="text" name="rad" placeholder="Enter Search radius (meters)" /></td>
-            </tr>
-            <input type="submit" value="submit">
-          </form>
+
 
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-ygbV9kiqUc6oa4msXn9868pTtWMgiQaeYH7/t7LECLbyPA2x65Kgf80OJFdroafW" crossorigin="anonymous"></script>
