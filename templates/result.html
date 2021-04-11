@@ -136,7 +136,7 @@
                         var options = {tolerance:1,highQuality:false};
                         var length = turf.length(geojson);
                         var simplified=turf.simplify(geojson,options);
-                        var simline=L.geoJSON(simplified);.bindPopup(String(length));
+                        var simline=L.geoJSON(simplified).bindPopup(String(length));
                         polyline.addLayer(simline);
                         polyline.addTo(mymap);
                         mymap.removeEventListener('mousemove');
