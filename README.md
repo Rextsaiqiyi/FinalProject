@@ -12,11 +12,10 @@ An application searches the potential short-term rentals near schools in the Cit
      **flask run**, copy and paste the http link to your browser.
 
 2. Filter School
+
   Enter the name of School that you are interested in at the Search box. If you are\
   not sure what to enter, click the layer and check the school name. Choose your \
-  distance and enter into the "Enter Search Radius" box and click Search button.
-
-   More details can be found by clicking the Residences layers.
+  distance and enter into the "Enter Search Radius" box and click Search button. More details can be found by clicking the Residences layers.
 
 3. Routing
   Enter the school name to search for the directions of any locations near the selected school.
