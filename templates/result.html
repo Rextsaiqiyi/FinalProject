@@ -136,8 +136,8 @@
                       mymap.on('mouseup',function(e){
                         var geojson=turf.multiLineString([coordinates]);
                         var options = {tolerance:1,highQuality:false};
-                        var length = turf.length(geojson);
                         var simplified=turf.simplify(geojson,options);
+                        var length = turf.length(simplified);
                         var simline=L.geoJSON(simplified).bindPopup(String(length));
                         polyline.addLayer(simline);
                         polyline.addTo(mymap);
