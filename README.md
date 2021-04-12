@@ -1,4 +1,4 @@
-# FinalProject - Short-term Rentals Near Campus
+# FinalProject - Short-term Rentals Search
 An application searches the potential short-term rentals near schools in the City of Calgary
 
 ## Instructions
