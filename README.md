@@ -2,7 +2,7 @@
 An application searches the potential short-term rentals near schools in the City of Calgary
 
 ## Instructions
-1. Initialization
+**1. Initialization:**
   run the flask in your CMD
 
      **set FLASK_APP=app.py**
@@ -11,13 +11,13 @@ An application searches the potential short-term rentals near schools in the Cit
 
      **flask run**, copy and paste the http link to your browser.
 
-2. Filter School
+**2. Filter School:**
 Enter the name of School that you are interested in at the Search box. If you are not sure what to enter, click the layer and check the school name. Choose your distance and enter into the "Enter Search Radius" box and click Search button. More details can be found by clicking the Residences layers.
 
-3. Routing
+**3. Routing:**
   Enter the school name to search for the directions of any locations near the selected school.
 
-4. RESTful api
+**4. RESTful api:**
   By adding "/api/<string: business id of Residences>" to the end of Url will move
   you to the Residences layer.
 ***
